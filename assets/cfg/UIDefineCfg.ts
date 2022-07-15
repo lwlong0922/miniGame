@@ -31,13 +31,6 @@ export let UserData = {
     userName: '王老五'
 }
 
-
-
-
-
-
-
-
 export let CompType: any = {
     Label: cc.Label,
     Button: cc.Button,

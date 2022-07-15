@@ -1,3 +1,7 @@
+// UIBase.ts
+// create by liwl 2022/7/15
+// ui 的基类，所有自定义预制体的脚本都需要继承与此类
+
 import UIContianer from "./UIContianer";
 import { UIUtils } from "./UIUitls";
 import UIManager from "./UIManager";
@@ -51,6 +55,7 @@ export default class UIBase extends cc.Component {
         }
         this.onExit(params);
     }
+
     isOpen(uiName: string, params?: any) {
         return UIManager.getInstance().isOpen(uiName, params);
     }
@@ -76,7 +81,6 @@ export default class UIBase extends cc.Component {
         UIManager.getInstance().sendMsg.apply(UIManager.getInstance(), arguments);
     }
 
-
     handleMsg(params: any) {
 
     }
@@ -99,11 +103,9 @@ export default class UIBase extends cc.Component {
         this._ui.addEvent(eventName, name, cb);
     }
 
-
     addClickEvent(btnName: string, cb: Function) {
         this.addEvent('click', btnName, cb);
     }
-
 
     bindCb(data: Object, key: string, cb: Function, target?: any) {
         target = target || this;

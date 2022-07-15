@@ -13,5 +13,4 @@ export default class UIWindow extends UIBase {
         //node.addComponent(cc.Button);
         node.addComponent(cc.BlockInputEvents);
     }
-
 }

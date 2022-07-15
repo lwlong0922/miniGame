@@ -1,3 +1,7 @@
+// UIContianer.ts
+// create by liwl 2022/7/15
+// ui 容器，用于存储子节，方便获取
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -19,13 +23,12 @@ export default class UIContianer {
             Pageview: this._mapPageView
         }
 
-
     }
-
 
     getUIKeys() {
         return Object.keys(this._mapUI);
     }
+
     addNode(nodeName: string, node: cc.Node) {
         if (!node) {
             return;
@@ -63,6 +66,5 @@ export default class UIContianer {
         }
         node.on(eventName, cb);
     }
-
 
 }
