@@ -1,4 +1,4 @@
-import UIWindow from "../UIFramework/UIWindow";
+import UIWindow from "../framework/UIWindow";
 const { ccclass, property } = cc._decorator;
 
 @ccclass

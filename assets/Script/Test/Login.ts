@@ -1,6 +1,6 @@
-import UIBase from "../UIFramework/UIBase";
-import { UIUtils } from "../UIFramework/UIUitls";
-import { UserData } from "../UIFramework/UIDefine";
+import UIBase from "../framework/UIBase";
+import { UIUtils } from "../framework/UIUitls";
+import { UserData } from "../../cfg/UIDefineCfg";
 const { ccclass, property } = cc._decorator;
 
 @ccclass

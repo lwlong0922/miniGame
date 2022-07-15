@@ -1,5 +1,5 @@
 import UIBase from "./UIBase";
-import { UIPath, UILayer } from './UIDefine'
+import { UIPath, UILayer } from '../../cfg/UIDefineCfg'
 const { ccclass, property } = cc._decorator;
 
 @ccclass

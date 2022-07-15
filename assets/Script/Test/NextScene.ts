@@ -1,4 +1,4 @@
-import UIManager from "../UIFramework/UIManager";
+import UIManager from "../framework/UIManager";
 const { ccclass, property } = cc._decorator;
 
 @ccclass

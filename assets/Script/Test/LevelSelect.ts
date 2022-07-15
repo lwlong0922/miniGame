@@ -1,4 +1,4 @@
-import UIBase from "../UIFramework/UIBase";
+import UIBase from "../framework/UIBase";
 
 const { ccclass, property } = cc._decorator;
 

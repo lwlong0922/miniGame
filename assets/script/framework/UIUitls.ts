@@ -1,5 +1,5 @@
 import UIContianer from "./UIContianer";
-import { CompType } from "./UIDefine";
+import { CompType } from "../../cfg/UIDefineCfg";
 
 
 let objFunc: any = {};
