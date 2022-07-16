@@ -6,7 +6,8 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class Obj extends UIBase {
     private _userData:UserData = {
-        name: ""
+        name: "",
+        icon: ""
     }
 
     // 初始化
