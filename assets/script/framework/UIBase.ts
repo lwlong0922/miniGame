@@ -28,20 +28,20 @@ export default class UIBase extends cc.Component {
         UIUtils.findNode(this.node, this._ui);
         this.onInit(params);
     }
+
     //第一进来。
     onInit(params?: any) {
-
     }
 
     //每次进来。
     onEnter(params?: any) {
-
     }
+
     //每次退出
     onExit(params?: any) {
-
     }
 
+    // 显示自己
     open(params?: any) {
         if (!this.node.active) {
             this.node.active = true;
@@ -49,6 +49,7 @@ export default class UIBase extends cc.Component {
         this.onEnter(params);
     }
 
+    // 隐藏自己
     close(params?: any) {
         if (this.node.active) {
             this.node.active = false;
@@ -56,10 +57,12 @@ export default class UIBase extends cc.Component {
         this.onExit(params);
     }
 
+    // 自己的显示状态
     isOpen(uiName: string, params?: any) {
         return UIManager.getInstance().isOpen(uiName, params);
     }
 
+    // 打开某个ui
     openUI(uiName: string, isCloseSelf: boolean = false, layerName?: string, params?: any) {
         UIManager.getInstance().openUI(uiName, layerName, params);
         if (isCloseSelf) {
@@ -67,16 +70,17 @@ export default class UIBase extends cc.Component {
         }
     }
 
-
+    // 关闭某个ui
     closeUI(uiName: string, params?: any) {
         UIManager.getInstance().closeUI(uiName, params);
     }
 
-
+    // 关闭自己
     closeSelf() {
         this.closeUI(this._name);
     }
 
+    // 发送消息
     sendMsg(uiName: string, msgName: string, ...rest) {
         UIManager.getInstance().sendMsg.apply(UIManager.getInstance(), arguments);
     }
@@ -85,34 +89,39 @@ export default class UIBase extends cc.Component {
 
     }
 
+    // 加载某个场景
     loadScene(sceneName: string) {
         UIManager.getInstance().loadScene(sceneName);
     }
-    getNode(nodeName: string) {
 
+    // 获取子节点
+    getNode(nodeName: string) {
         return this._ui.getNode(nodeName);
     }
 
+    // 获取子节点的脚本
     getComp(compName: string, typeName: string) {
-
         return this._ui.getComp(compName, typeName);
     }
 
-
+    // 添加事件
     addEvent(eventName: string, name: string, cb: Function) {
         this._ui.addEvent(eventName, name, cb);
     }
 
+    // 添加点击事件
     addClickEvent(btnName: string, cb: Function) {
         this.addEvent('click', btnName, cb);
     }
 
+    // 绑定回调
     bindCb(data: Object, key: string, cb: Function, target?: any) {
         target = target || this;
         let watcher = new UIWatcher(data, key, cb, target);
         this._arrWatcher.push(watcher);
     }
 
+    // 监听数据变化，执行对应的逻辑
     bindComp(data: Object, key: string, comp: cc.Component, typeName: string, target?: any) {
         target = target || this;
         let watcher = new UIWatcher(data, key, UIUtils.onRefreshComp, comp, typeName, target);

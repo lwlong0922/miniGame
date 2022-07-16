@@ -27,6 +27,7 @@ export default class UserInfo extends UIBase {
 
         this.bindComp(UserData, 'coin', this.getComp('UserInfo_LbCoin', 'Label'), 'Label');
     }
+
     handleMsg(params: any) {
         // this.getComp('UserInfo_LbUserName','Label').string = params.name;
         // this.getComp('UserInfo_LbLevel','Label').string = params.level;

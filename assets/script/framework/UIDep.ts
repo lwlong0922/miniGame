@@ -18,8 +18,6 @@ export default class UIWatcher {
         dep.addWatcher(this);
     }
 
-
-
     // 比较两个watcher是否重复，必须满足对象一样，key也一样，回调一样，对象也一样。
     isEquals(watcher: UIWatcher) {
         return this._data === watcher._data
@@ -33,6 +31,7 @@ export default class UIWatcher {
         let dep = UIDepPool.getInstance().getDep(this._data, this._key);
         dep.removeWatcher(this);
     }
+
     notify(oldValue: any, newValue: any) {
         // 调用回调函数。
         this._cb.call(this._target, oldValue, newValue, this._comp, this._typeName);
@@ -43,6 +42,7 @@ export default class UIWatcher {
 export class UIDep {
     private _data: Object = null;
     private _key: string = '';
+
     // 多个监视器
     private _arrWatcher: UIWatcher[] = [];
     constructor(data: Object, key: string) {
@@ -76,13 +76,14 @@ export class UIDep {
     isContain(data: Object, key: string) {
         return data === this._data && key === this._key;
     }
+
     // 添加监视器接口
     addWatcher(watcherIn: UIWatcher) {
         // 查重。
         //  for(let watcher of this._arrWatcher){
         //      if(watcher.isEquals(watcherIn)){
         //          return;
-        //      }            
+        //      }
         //  }
         if (!watcherIn) {
             return;
@@ -122,6 +123,7 @@ export class UIDepPool {
 
         return this._instance;
     }
+
     // 到订阅池去查找是否存在这个key，data对应的订阅器，如果存在，那么返回这个订阅器
     // 如果不存在，那么创建一个出来，并且存储到池里面，同时返回出去。
     getDep(data: object, key: string) {

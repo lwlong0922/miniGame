@@ -11,12 +11,14 @@ interface UILayerType {
     Widget: string,
     Window: string
 }
+
 export let UIPath = {
     Login: 'prefab/ui/Login',
     UserInfo: 'prefab/ui/UserInfo',
     LevelSelect: 'prefab/ui/LevelSelect',
     UIRoot: 'prefab/ui/UIRoot',
-    PopupWindow: 'prefab/ui/PopupWindow'
+    PopupWindow: 'prefab/ui/PopupWindow',
+    Char: 'prefab/ui/Char'
 }
 
 
