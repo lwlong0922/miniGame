@@ -2,7 +2,6 @@
 // create by liwl 2022/7/15
 // ui 的基类，所有自定义预制体的脚本都需要继承与此类
 
-import UIContianer from "./UIContianer";
 import { UIUtils } from "./UIUitls";
 import UIManager from "./UIManager";
 import UIWatcher from "./UIDep";
@@ -10,7 +9,6 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class UIBase extends cc.Component {
-    private _ui: UIContianer = new UIContianer();
 
     private _name: string = '';
     private _arrWatcher: UIWatcher[] = [];
@@ -25,7 +23,6 @@ export default class UIBase extends cc.Component {
     //第一次进来。
     init(params?: any) {
         //所有ui公共会使用的逻辑放到init，然后onInit具体到时候不同的派生类重写。
-        UIUtils.findNode(this.node, this._ui);
         this.onInit(params);
     }
 
@@ -95,36 +92,40 @@ export default class UIBase extends cc.Component {
     }
 
     // 获取子节点
-    getNode(nodeName: string) {
-        return this._ui.getNode(nodeName);
+    getNode(nodePath: string) {
+        return cc.find(nodePath, this.node)
     }
 
     // 获取子节点的脚本
-    getComp(compName: string, typeName: string) {
-        return this._ui.getComp(compName, typeName);
+    getComp(nodePath: string, compName: string) {
+        let node = this.getNode(nodePath)
+        if(!node){
+            return
+        }
+        return node.getComponent(compName)
     }
 
     // 添加事件
-    addEvent(eventName: string, name: string, cb: Function) {
-        this._ui.addEvent(eventName, name, cb);
+    addEvent(eventName: string, nodePath: string, cb: Function) {
+        if(!cb){
+            return;
+        }
+        let node = this.getNode(nodePath)
+        if(!node){
+            return
+        }
+        node.on(eventName, cb);
     }
 
     // 添加点击事件
-    addClickEvent(btnName: string, cb: Function) {
-        this.addEvent('click', btnName, cb);
-    }
-
-    // 绑定回调
-    bindCb(data: Object, key: string, cb: Function, target?: any) {
-        target = target || this;
-        let watcher = new UIWatcher(data, key, cb, target);
-        this._arrWatcher.push(watcher);
+    addClickEvent(nodePath: string, cb: Function) {
+        this.addEvent('click', nodePath, cb);
     }
 
     // 监听数据变化，执行对应的逻辑
-    bindComp(data: Object, key: string, comp: cc.Component, typeName: string, target?: any) {
+    bindDataChangeCb(data: Object, key: string, cb: Function, target?: any) {
         target = target || this;
-        let watcher = new UIWatcher(data, key, UIUtils.onRefreshComp, comp, typeName, target);
+        let watcher = new UIWatcher(data, key, cb, target);
         this._arrWatcher.push(watcher);
     }
 

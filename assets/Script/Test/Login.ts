@@ -16,7 +16,7 @@ export default class Login extends UIBase {
         // .by(1.0,{position:cc.v3(100,100)})
         // .start();
 
-        this.addClickEvent('Login_BtnLogin', () => {
+        this.addClickEvent('_BtnLogin', () => {
             this.openUI('UserInfo', true);
             //this.loadScene('Next');
             //this.openUI('PopupWindow');
@@ -26,9 +26,9 @@ export default class Login extends UIBase {
             console.log('滚动');
         })
 
-        this.bindCb(UserData, 'coin', (oldValue: any, newValue: any) => {
+        this.bindDataChangeCb(UserData, 'coin', (oldValue: any, newValue: any) => {
             //刷新标签。
-            this.getComp('Login_LbCoin', 'Label').string = '金币:' + newValue;
+            this.getComp('_LbCoin', 'cc.Label').string = '金币:' + newValue;
         })
         //this.bindComp(UserData,'coin',this.getComp('Login_LbCoin','Label'),"");
 

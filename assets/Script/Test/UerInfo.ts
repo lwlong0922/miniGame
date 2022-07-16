@@ -8,24 +8,22 @@ export default class UserInfo extends UIBase {
     onInit(params?: any) {
         //this.getComp('UserInfo_LbUserName','Label').string = '大哥';
 
-        this.addClickEvent('UserInfo_BtnBack', () => {
+        this.addClickEvent('_BtnBack', () => {
             this.openUI('Login', true);
         })
 
-        this.addClickEvent('UserInfo_BtnAdd', () => {
+        this.addClickEvent('_BtnAdd', () => {
             UserData.coin++;
         })
 
-        this.addClickEvent('UserInfo_BtnReduce', () => {
+        this.addClickEvent('_BtnReduce', () => {
             UserData.coin--;
         })
 
-        // this.bindCb(UserData,'coin',(oldValue:any,newValue:any)=>{
-        //     //刷新标签。
-        //     this.getComp('UserInfo_LbCoin','Label').string = '金币:'+newValue;
-        // })
-
-        this.bindComp(UserData, 'coin', this.getComp('UserInfo_LbCoin', 'Label'), 'Label');
+        this.bindDataChangeCb(UserData, 'coin', (oldValue: any, newValue: any) => {
+            //刷新标签。
+            this.getComp('_LbCoin', 'cc.Label').string = newValue;
+        })
     }
 
     handleMsg(params: any) {

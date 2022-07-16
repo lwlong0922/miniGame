@@ -6,13 +6,11 @@ export default class UIWatcher {
     private _target: any = null;
     private _comp: cc.Component = null;
     private _typeName: string = '';
-    constructor(data: Object, key: string, cb: Function, comp?: cc.Component, typeName?: string, target?: any) {
+    constructor(data: Object, key: string, cb: Function, target?: any) {
         this._data = data;
         this._key = key;
         this._cb = cb;
-        this._comp = comp;
         this._target = target;
-        this._typeName = typeName;
         // 创建出来的时候直接到订阅器池里面获取对应的订阅器，把监视器添加进去。
         let dep = UIDepPool.getInstance().getDep(this._data, this._key);
         dep.addWatcher(this);
@@ -34,7 +32,7 @@ export default class UIWatcher {
 
     notify(oldValue: any, newValue: any) {
         // 调用回调函数。
-        this._cb.call(this._target, oldValue, newValue, this._comp, this._typeName);
+        this._cb.call(this._target, oldValue, newValue);
     }
 }
 

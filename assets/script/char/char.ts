@@ -38,8 +38,11 @@ export default class NewClass extends Obj {
             let node = new cc.Node()
             let sprite = node.addComponent(cc.Sprite)
             sprite.spriteFrame = spriteFrame
-            node.parent = this._middleLayer
             node.setContentSize(60, 60)
+            node.parent = this._middleLayer
+            let topLayer = cc.find('bottomLayer', this.node)
+            console.log(parent);
+            
         });
     
         super.init(params)
