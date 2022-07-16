@@ -1,25 +1,32 @@
 
 import UIBase from "../framework/UIBase";
-import {UserData} from "../../cfg/UserDataCfg";
 const { ccclass, property } = cc._decorator;
+
+
+interface UserData{
+    [key: string]: any
+}
 
 @ccclass
 export default class Obj extends UIBase {
     private _userData:UserData = {
-        name: "",
-        icon: ""
     }
 
     // 初始化
     init(params?: any) {
-        this.updateState();
         super.init(params)
     }
 
-    // 吸收字段
-    absorbField(name: string, value: any) {
-        this._userData.name = value
-        this.updateState(name)
+    // 吸收多个字段
+    absorbField(newUserData: UserData) {
+        let arrKeys:Array<string> = Object.keys(newUserData);
+        for(let key of arrKeys){
+            if(!(key in this._userData)){
+                // 如果新的属性没有被监听，则添加监听
+                this.bindDataChangeCb(this._userData, key, this.updateOneState)
+            }
+            this._userData[key] = newUserData[key]
+        }
     }
 
     // 查询字段
@@ -27,7 +34,7 @@ export default class Obj extends UIBase {
         return this._userData[name]
     }
 
-    // 更新状态
-    updateState(name?: string){
+    // 更新一个状态
+    updateOneState(oldValue?: string, newValue?:string, key?:string){
     }
 }

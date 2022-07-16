@@ -1,6 +1,6 @@
 import Obj from "./Obj";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 const BOTTOM_LAYER_ZORDER = 100;
 const MIDDLE_LAYER_ZORDER = 200;
 const TOP_LAYER_ZORDER = 300;
@@ -30,7 +30,7 @@ export default class NewClass extends Obj {
         this.node.addChild(this._middleLayer, MIDDLE_LAYER_ZORDER, "middleLayer")
         this.node.addChild(this._topLayer, TOP_LAYER_ZORDER, "topLayer")
 
-        
+
         cc.resources.load("char/head", cc.SpriteFrame, (error, spriteFrame) => {
             if (error) {
                 console.log("resources.load - " + error)
@@ -40,21 +40,19 @@ export default class NewClass extends Obj {
             sprite.spriteFrame = spriteFrame
             node.setContentSize(60, 60)
             node.parent = this._middleLayer
-            let topLayer = cc.find('bottomLayer', this.node)
-            console.log(parent);
-            
+
         });
-    
+
         super.init(params)
+        this.absorbField({ name: "sssss", icon: "22", test: 33 })
     }
 
-    // 更新状态
-    updateState(name?: string){
-        if (name && name.length) {
-            console.log('have name');
+    // 更新一个状态
+    updateOneState(oldValue?: any, newValue?: any, key?: string) {
+        if (key && key.length) {
+            console.log(key + ':' + newValue);
             return null;
         }
-        console.log('no name');
     }
 
 }

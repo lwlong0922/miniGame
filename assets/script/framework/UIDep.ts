@@ -32,7 +32,7 @@ export default class UIWatcher {
 
     notify(oldValue: any, newValue: any) {
         // 调用回调函数。
-        this._cb.call(this._target, oldValue, newValue);
+        this._cb.call(this._target, oldValue, newValue, this._key);
     }
 }
 
